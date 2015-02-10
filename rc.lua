@@ -31,6 +31,7 @@ require("naughty")
 require("freedesktop.utils")
 require("freedesktop.menu")
 require("freedesktop.desktop")
+require("volume")
 -- use local keyword for awesome 3.5 compatability
 -- calendar functions
 local calendar2 = require("calendar2")
@@ -334,6 +335,11 @@ for s = 1, screen.count() do
         spacer,
         separator,
         spacer,
+		
+		volume_widget,
+        spacer,
+        separator,
+        spacer,
 
         -- wifi,
         -- spacer,
@@ -375,6 +381,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,"Next tag" ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,"Clear Choice"),
     awful.key({modkey,}, "F1",keydoc.display,"Display Keymap Menu"),
+    awful.key({ modkey,           }, "Up",    function () awful.util.spawn("amixer set Master 9%+") end),
+    awful.key({ modkey,           }, "Down",  function () awful.util.spawn("amixer set Master 9%-") end),
 
     awful.key({ modkey,           }, "j",
         function ()
